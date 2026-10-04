@@ -9,6 +9,7 @@ public class PetDatabase
     private readonly SemaphoreSlim _initLock = new(1, 1);
     private bool _initialized;
 
+    //Inicijalizuje SQLite bazu samo jednom i kreira potrebne tabele
     private async Task Init()
     {
         if (_initialized)
@@ -57,6 +58,7 @@ public class PetDatabase
             .FirstOrDefaultAsync();
     }
 
+    //Dodaje novog ljubimca ili azurira postojeceg u bazi
     public async Task<int> SavePetAsync(Pet pet)
     {
         await Init();
@@ -67,6 +69,7 @@ public class PetDatabase
         return await _database!.InsertAsync(pet);
     }
 
+    //Brise ljubimca i sve njegove zdravstvene dogadjaje u istoj transakciji
     public async Task<int> DeletePetAsync(Pet pet)
     {
         await Init();
@@ -111,6 +114,7 @@ public class PetDatabase
             .FirstOrDefaultAsync();
     }
 
+    //Validira i cuva novi ili izmenjeni zdravstveni dogadjaj
     public async Task<int> SaveHealthEventAsync(HealthEvent healthEvent)
     {
         if (string.IsNullOrWhiteSpace(healthEvent.Title))

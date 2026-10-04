@@ -89,7 +89,7 @@ public partial class PetFormPage : ContentPage
         }
         catch (OperationCanceledException)
         {
-            // Closing the picker leaves the current photo unchanged.
+            //Zatvaranje biraca fotografije ne menja trenutno izabranu fotografiju
         }
         catch (PermissionException ex)
         {
@@ -123,6 +123,7 @@ public partial class PetFormPage : ContentPage
         UpdatePhotoPreview();
     }
 
+    //Azurira prikaz fotografije i stanje dugmadi u formi
     private void UpdatePhotoPreview()
     {
         string? path = _removePhoto
@@ -146,6 +147,7 @@ public partial class PetFormPage : ContentPage
         SaveButton.IsEnabled = enabled;
     }
 
+    //Validita i cuva unos novog ili izmenjenog ljubimca u SQLite bazu
     private async void OnSaveClicked(object? sender, EventArgs e)
     {
         if (_isSaving || _saved || _isPickingPhoto)
@@ -238,7 +240,7 @@ public partial class PetFormPage : ContentPage
             _photoFileName = pet.PhotoFileName;
             _removePhoto = false;
 
-            // Remove the old photo only after the database save succeeds.
+            //Staru fotografiju brisemo tek nakon uspesnog cuvanja podataka u bazi
             if (previousPhotoFileName != pet.PhotoFileName)
             {
                 PetPhotoService.DeleteSavedPhoto(previousPhotoFileName);

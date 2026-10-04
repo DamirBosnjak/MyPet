@@ -57,7 +57,7 @@
                     BackgroundColor="White">
 
                     <Picker.Items>
-                        <x:String>Pending</x:String>
+                        <x:String>Planned</x:String>
                         <x:String>Completed</x:String>
                         <x:String>Overdue</x:String>
                         <x:String>All</x:String>

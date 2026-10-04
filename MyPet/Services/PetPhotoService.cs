@@ -42,6 +42,7 @@ public static class PetPhotoService
             Path.GetExtension(photo.FileName));
     }
 
+    //Prebacuje izabranu fotografiju iz privremenog cache-a u trajni folder aplikacije
     public static async Task<string> SaveFromCacheAsync(string cachedPath)
     {
         using var source = File.OpenRead(cachedPath);

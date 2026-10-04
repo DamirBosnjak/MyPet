@@ -28,6 +28,7 @@ public partial class MainPage : ContentPage
         BindingContext = this;
     }
 
+    //Ucitava ljubimce iz baze svaki put kada se pocetna stranica prikaze
     protected override async void OnAppearing()
     {
         base.OnAppearing();
@@ -63,6 +64,7 @@ public partial class MainPage : ContentPage
         ApplySearch();
     }
 
+    //Filtrira ljubimce po imenu, vrsti ili rasi
     private void ApplySearch()
     {
         var filteredPets = _allPets.Where(pet =>

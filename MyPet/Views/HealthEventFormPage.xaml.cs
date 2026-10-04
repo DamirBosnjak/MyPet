@@ -40,6 +40,7 @@ public partial class HealthEventFormPage : ContentPage
         }
     }
 
+    //Validira i cuva novi ili izmenjeni zdravstveni dogadjaj
     private async void OnSaveClicked(object? sender, EventArgs e)
     {
         if (_isBusy || _finished)
@@ -117,6 +118,7 @@ public partial class HealthEventFormPage : ContentPage
         await ReturnToProfileAsync();
     }
 
+    //Trazi potvrdu pre trajnog brisanja zdravstvenog dogadjaja
     private async void OnDeleteClicked(object? sender, EventArgs e)
     {
         if (_isBusy || _finished || _eventId == 0)

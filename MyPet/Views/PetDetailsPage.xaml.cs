@@ -25,6 +25,7 @@ public partial class PetDetailsPage : ContentPage
         EventsCollection.ItemsSource = _events;
     }
 
+    //Ucitava podatke o ljubimcu i njegove zdravstvene dogadjaje
     protected override async void OnAppearing()
     {
         base.OnAppearing();
@@ -136,6 +137,7 @@ public partial class PetDetailsPage : ContentPage
         }
     }
 
+    //Trazi potvrdu korisnika pre brisanja ljubimca i povezanih podataka
     private async void OnDeleteClicked(object? sender, EventArgs e)
     {
         if (_isBusy || _isLoading || _pet is null)

@@ -41,6 +41,7 @@ public partial class CareOverviewPage : ContentPage
         await LoadEventsAsync();
     }
 
+    //Ucitava sve ljubimce i zdravstvene dogadjaje za *Care* pregled
     private async Task LoadEventsAsync()
     {
         if (_isLoading || _isNavigating)
@@ -131,6 +132,7 @@ public partial class CareOverviewPage : ContentPage
         ApplyFilters();
     }
 
+    //Filtrira dogadjaje prema izabranom ljubimcu i statusu
     private void ApplyFilters()
     {
         IEnumerable<CareItem> results = _allItems;
@@ -145,9 +147,15 @@ public partial class CareOverviewPage : ContentPage
 
         results = StatusPicker.SelectedIndex switch
         {
-            0 => results.Where(item => !item.Event.IsCompleted),
-            1 => results.Where(item => item.Event.IsCompleted),
-            2 => results.Where(item => item.Event.IsOverdue),
+            0 => results.Where(item =>
+                !item.Event.IsCompleted && !item.Event.IsOverdue),
+
+            1 => results.Where(item =>
+                item.Event.IsCompleted),
+
+            2 => results.Where(item =>
+                item.Event.IsOverdue),
+
             _ => results
         };
 
