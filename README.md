@@ -46,23 +46,46 @@ Technologies
 - Android SDK for Android development
 - Xcode and an iOS Simulator for iOS development on macOS
   Clone the repository:
-  git clone https://github.com/DamirBosnjak/MyPet.git
-  cd MyPet
-  Restore the project:
-  dotnet restore MyPet/MyPet.csproj
-  Build for Android:
-  dotnet build MyPet/MyPet.csproj -f net10.0-android
-  Build for iOS Simulator:
-  dotnet build MyPet/MyPet.csproj -f net10.0-ios -r iossimulator-arm64
-  The project can also be opened in JetBrains Rider and started by selecting an Android emulator or iPhone simulator and pressing Run.
-  Project structure
-  MyPet/
-  ├── Models/       # Data models used by the application
-  ├── Services/     # SQLite and photo handling
-  ├── Views/        # Application pages
-  ├── Resources/    # Icons, styles and app resources
-  ├── Platforms/    # Android and iOS platform-specific files
-  └── MauiProgram.cs
-  Notes
-  All application data is stored locally using SQLite.
-  The Android and iOS versions therefore have separate local databases on their respective emulator or device.
+
+```bash
+git clone https://github.com/DamirBosnjak/MyPet.git
+cd MyPet
+```
+
+Restore the project:
+
+```bash
+dotnet restore MyPet/MyPet.csproj
+```
+
+Build for Android:
+
+```bash
+dotnet build MyPet/MyPet.csproj -f net10.0-android
+```
+
+Build for iOS Simulator:
+
+```bash
+dotnet build MyPet/MyPet.csproj -f net10.0-ios -r iossimulator-arm64
+```
+
+The project can also be opened in JetBrains Rider and started by selecting an Android emulator or iPhone simulator and pressing **Run**.
+
+## Project structure
+
+```text
+MyPet/
+├── Models/       # Data models used by the application
+├── Services/     # SQLite and photo handling
+├── Views/        # Application pages
+├── Resources/    # Icons, styles and app resources
+├── Platforms/    # Android and iOS platform-specific files
+└── MauiProgram.cs
+```
+
+## Notes
+
+All application data is stored locally using SQLite.
+
+The Android and iOS versions therefore have separate local databases on their respective emulator or device.
