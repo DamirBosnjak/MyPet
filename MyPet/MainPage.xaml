@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MyPet"
+    xmlns:models="clr-namespace:MyPet.Models"
+    x:Class="MyPet.MainPage"
+    x:DataType="local:MainPage"
+    Title="MyPet"
+    BackgroundColor="#F7F8F5">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="Care"
+            Clicked="OnCareOverviewClicked" />
+    </ContentPage.ToolbarItems>
+
+    <Grid
+        Padding="24"
+        RowDefinitions="Auto,*,Auto"
+        RowSpacing="20">
+
+        <VerticalStackLayout Spacing="6">
+            <Label
+                Text="My Pets"
+                FontSize="30"
+                FontAttributes="Bold"
+                TextColor="#202B26" />
+
+            <Label
+                Text="Their little world, all in one place"
+                FontSize="14"
+                TextColor="#66736B" />
+
+            <SearchBar
+                x:Name="PetSearchBar"
+                Placeholder="Search by name, species or breed"
+                TextChanged="OnSearchTextChanged"
+                TextColor="#202B26"
+                PlaceholderColor="#66736B"
+                CancelButtonColor="#2F6655"
+                BackgroundColor="#F7F8F5"
+                Margin="0,12,0,0" />
+        </VerticalStackLayout>
+
+        <CollectionView
+            Grid.Row="1"
+            ItemsSource="{Binding Pets}"
+            BackgroundColor="#F7F8F5"
+            SelectionMode="Single"
+            SelectionChanged="OnPetSelected">
+
+            <CollectionView.EmptyView>
+                <VerticalStackLayout
+                    Padding="16"
+                    Spacing="12"
+                    VerticalOptions="Center">
+
+                    <Label
+                        Text="{Binding EmptyTitle}"
+                        FontSize="22"
+                        FontAttributes="Bold"
+                        HorizontalTextAlignment="Center"
+                        TextColor="#202B26" />
+
+                    <Label
+                        Text="{Binding EmptyMessage}"
+                        FontSize="16"
+                        HorizontalTextAlignment="Center"
+                        TextColor="#66736B" />
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Pet">
+                    <Border
+                        Padding="16"
+                        Margin="0,0,0,12"
+                        BackgroundColor="White"
+                        Stroke="#DDE5DE"
+                        StrokeShape="RoundRectangle 18">
+
+                        <Grid
+                            ColumnDefinitions="76,*"
+                            ColumnSpacing="16">
+
+                            <Border
+                                WidthRequest="76"
+                                HeightRequest="76"
+                                BackgroundColor="#E7EFE9"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 18">
+
+                                <Grid>
+                                    <Image
+                                        Source="{Binding PhotoPath}"
+                                        IsVisible="{Binding HasPhoto}"
+                                        Aspect="AspectFill" />
+
+                                    <Label
+                                        Text="🐾"
+                                        IsVisible="{Binding HasNoPhoto}"
+                                        FontSize="32"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center" />
+                                </Grid>
+                            </Border>
+
+                            <VerticalStackLayout
+                                Grid.Column="1"
+                                Spacing="6"
+                                VerticalOptions="Center">
+
+                                <Label
+                                    Text="{Binding Name}"
+                                    FontSize="22"
+                                    FontAttributes="Bold"
+                                    TextColor="#202B26" />
+
+                                <Label
+                                    Text="{Binding Description}"
+                                    FontSize="15"
+                                    TextColor="#66736B" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button
+            x:Name="AddPetButton"
+            Grid.Row="2"
+            Text="+ Add Pet"
+            Clicked="OnAddPetClicked"
+            BackgroundColor="#2F6655"
+            TextColor="White"
+            FontSize="16"
+            CornerRadius="16"
+            HeightRequest="54" />
+    </Grid>
+</ContentPage>

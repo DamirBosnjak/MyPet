@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:MyPet.Models"
+    x:Class="MyPet.Views.CareOverviewPage"
+    Title="Care Overview"
+    BackgroundColor="#F7F8F5">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="Refresh"
+            Clicked="OnRefreshClicked" />
+    </ContentPage.ToolbarItems>
+
+    <Grid
+        Padding="20"
+        RowDefinitions="Auto,Auto,Auto,*"
+        RowSpacing="16">
+
+        <VerticalStackLayout Spacing="6">
+            <Label
+                Text="Stay on top of their care"
+                FontSize="25"
+                FontAttributes="Bold"
+                TextColor="#202B26" />
+
+            <Label
+                Text="Health events for all your pets."
+                TextColor="#66736B" />
+        </VerticalStackLayout>
+
+        <Grid
+            Grid.Row="1"
+            ColumnDefinitions="*,*"
+            ColumnSpacing="12">
+
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Pet" TextColor="#66736B" />
+
+                <Picker
+                    x:Name="PetPicker"
+                    Title="Select pet"
+                    SelectedIndexChanged="OnFilterChanged"
+                    TextColor="#202B26"
+                    BackgroundColor="White" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Column="1" Spacing="4">
+                <Label Text="Status" TextColor="#66736B" />
+
+                <Picker
+                    x:Name="StatusPicker"
+                    Title="Select status"
+                    SelectedIndexChanged="OnFilterChanged"
+                    TextColor="#202B26"
+                    BackgroundColor="White">
+
+                    <Picker.Items>
+                        <x:String>Pending</x:String>
+                        <x:String>Completed</x:String>
+                        <x:String>Overdue</x:String>
+                        <x:String>All</x:String>
+                    </Picker.Items>
+                </Picker>
+            </VerticalStackLayout>
+        </Grid>
+
+        <Grid Grid.Row="2" ColumnDefinitions="*,Auto">
+            <Label
+                x:Name="SummaryLabel"
+                Text="Loading events..."
+                TextColor="#66736B" />
+
+            <ActivityIndicator
+                x:Name="LoadingIndicator"
+                Grid.Column="1"
+                IsVisible="False"
+                IsRunning="False"
+                Color="#2F6655" />
+        </Grid>
+
+        <CollectionView
+            x:Name="EventsCollection"
+            Grid.Row="3"
+            BackgroundColor="#F7F8F5"
+            SelectionMode="Single"
+            SelectionChanged="OnEventSelected">
+
+            <CollectionView.EmptyView>
+                <VerticalStackLayout Padding="16" Spacing="8">
+                    <Label
+                        Text="No matching events"
+                        FontSize="20"
+                        FontAttributes="Bold"
+                        HorizontalTextAlignment="Center"
+                        TextColor="#202B26" />
+
+                    <Label
+                        Text="Change the filters or add an event from a pet's profile."
+                        HorizontalTextAlignment="Center"
+                        TextColor="#66736B" />
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:CareItem">
+
+                    <Border
+                        Padding="18"
+                        Margin="0,0,0,12"
+                        BackgroundColor="White"
+                        Stroke="#DDE5DE"
+                        StrokeShape="RoundRectangle 16">
+
+                        <VerticalStackLayout Spacing="6">
+                            <Label
+                                Text="{Binding PetName}"
+                                FontSize="14"
+                                FontAttributes="Bold"
+                                TextColor="#2F6655" />
+
+                            <Label
+                                Text="{Binding Event.Title}"
+                                FontSize="19"
+                                FontAttributes="Bold"
+                                TextColor="#202B26" />
+
+                            <Label
+                                Text="{Binding Event.TypeText}"
+                                TextColor="#66736B" />
+
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label
+                                    Text="{Binding Event.DateText}"
+                                    TextColor="#66736B" />
+
+                                <Label
+                                    Grid.Column="1"
+                                    Text="{Binding Event.StatusText}"
+                                    FontAttributes="Bold"
+                                    TextColor="#2F6655">
+
+                                    <Label.Triggers>
+                                        <DataTrigger
+                                            TargetType="Label"
+                                            Binding="{Binding Event.IsOverdue}"
+                                            Value="True">
+                                            <Setter
+                                                Property="TextColor"
+                                                Value="#B42318" />
+                                        </DataTrigger>
+
+                                        <DataTrigger
+                                            TargetType="Label"
+                                            Binding="{Binding Event.IsCompleted}"
+                                            Value="True">
+                                            <Setter
+                                                Property="TextColor"
+                                                Value="#027A48" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+
+                                </Label>
+                            </Grid>
+                        </VerticalStackLayout>
+
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

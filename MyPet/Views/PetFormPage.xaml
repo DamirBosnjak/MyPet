@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="MyPet.Views.PetFormPage"
+    Title="New Pet"
+    BackgroundColor="#F7F8F5">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="16">
+
+            <Label
+                x:Name="FormHeading"
+                Text="Let's get to know your pet"
+                FontSize="26"
+                FontAttributes="Bold"
+                TextColor="#202B26" />
+
+            <Label
+                Text="Name and species are required."
+                FontSize="14"
+                TextColor="#66736B" />
+            
+            <Border
+                WidthRequest="140"
+                HeightRequest="140"
+                HorizontalOptions="Center"
+                BackgroundColor="#E7EFE9"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 24">
+
+                <Grid>
+                    <Image
+                        x:Name="PhotoPreview"
+                        Aspect="AspectFill"
+                        IsVisible="False" />
+
+                    <Label
+                        x:Name="PhotoPlaceholder"
+                        Text="🐾"
+                        FontSize="52"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center" />
+                </Grid>
+            </Border>
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                <Button
+                    x:Name="ChoosePhotoButton"
+                    Text="Choose photo"
+                    Clicked="OnChoosePhotoClicked"
+                    BackgroundColor="#E7EFE9"
+                    TextColor="#2F6655"
+                    CornerRadius="14" />
+
+                <Button
+                    x:Name="RemovePhotoButton"
+                    Grid.Column="1"
+                    Text="Remove photo"
+                    Clicked="OnRemovePhotoClicked"
+                    IsEnabled="False"
+                    BackgroundColor="#FEE4E2"
+                    TextColor="#B42318"
+                    CornerRadius="14" />
+            </Grid>
+
+            <Label Text="Name" TextColor="#202B26" />
+
+            <Entry
+                x:Name="NameEntry"
+                Placeholder="For example: Buddy"
+                MaxLength="50"
+                TextColor="#202B26"
+                PlaceholderColor="#66736B"
+                BackgroundColor="White" />
+
+            <Label Text="Species" TextColor="#202B26" />
+
+            <Entry
+                x:Name="SpeciesEntry"
+                Placeholder="Dog, cat, parrot..."
+                MaxLength="40"
+                TextColor="#202B26"
+                PlaceholderColor="#66736B"
+                BackgroundColor="White" />
+
+            <Label Text="Breed (optional)" TextColor="#202B26" />
+
+            <Entry
+                x:Name="BreedEntry"
+                Placeholder="For example: (Husky)"
+                MaxLength="80"
+                TextColor="#202B26"
+                PlaceholderColor="#66736B"
+                BackgroundColor="White" />
+            
+            <Label Text="Gender (optional)" TextColor="#202B26" />
+
+            <Picker
+                x:Name="GenderPicker"
+                Title="Select gender"
+                TextColor="#202B26"
+                BackgroundColor="White">
+
+                <Picker.Items>
+                    <x:String>Male</x:String>
+                    <x:String>Female</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <Grid ColumnDefinitions="*,Auto">
+                <Label
+                    Text="Birth date known"
+                    VerticalOptions="Center"
+                    TextColor="#202B26" />
+
+                <Switch
+                    x:Name="BirthDateKnownSwitch"
+                    Grid.Column="1"
+                    Toggled="OnBirthDateKnownToggled"
+                    OnColor="#2F6655" />
+            </Grid>
+
+            <DatePicker
+                x:Name="BirthDatePicker"
+                IsVisible="False"
+                Format="dd MMM yyyy"
+                TextColor="#202B26"
+                BackgroundColor="White" />
+
+            <Label Text="Notes (optional)" TextColor="#202B26" />
+
+            <Editor
+                x:Name="NotesEditor"
+                Placeholder="Habits, preferences or other useful details..."
+                MaxLength="2000"
+                AutoSize="TextChanges"
+                MinimumHeightRequest="100"
+                TextColor="#202B26"
+                PlaceholderColor="#66736B"
+                BackgroundColor="White" />
+
+            <Label
+                x:Name="ErrorLabel"
+                IsVisible="False"
+                TextColor="#B42318"
+                FontSize="14" />
+
+            <Button
+                x:Name="SaveButton"
+                Text="Save pet"
+                Clicked="OnSaveClicked"
+                BackgroundColor="#2F6655"
+                TextColor="White"
+                CornerRadius="16"
+                HeightRequest="54"
+                Margin="0,12,0,0" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

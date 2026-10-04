@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="MyPet.Views.HealthEventFormPage"
+    Title="New Health Event"
+    BackgroundColor="#F7F8F5">
+
+    <ScrollView>
+        <VerticalStackLayout
+            x:Name="FormContent"
+            Padding="24"
+            Spacing="16">
+
+            <Label
+                Text="Health event"
+                FontSize="26"
+                FontAttributes="Bold"
+                TextColor="#202B26" />
+
+            <Label Text="Title" TextColor="#202B26" />
+
+            <Entry
+                x:Name="TitleEntry"
+                Placeholder="For example: Annual vaccination"
+                MaxLength="100"
+                TextColor="#202B26"
+                PlaceholderColor="#66736B"
+                BackgroundColor="White" />
+
+            <Label Text="Type" TextColor="#202B26" />
+
+            <Picker
+                x:Name="TypePicker"
+                Title="Select event type"
+                TextColor="#202B26"
+                BackgroundColor="White">
+
+                <Picker.Items>
+                    <x:String>Vaccination</x:String>
+                    <x:String>Vet visit</x:String>
+                    <x:String>Treatment</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <Label Text="Date" TextColor="#202B26" />
+
+            <DatePicker
+                x:Name="EventDatePicker"
+                Format="dd MMM yyyy"
+                TextColor="#202B26"
+                BackgroundColor="White" />
+
+            <Grid ColumnDefinitions="*,Auto">
+                <Label
+                    Text="Completed"
+                    VerticalOptions="Center"
+                    TextColor="#202B26" />
+
+                <Switch
+                    x:Name="CompletedSwitch"
+                    Grid.Column="1"
+                    OnColor="#2F6655" />
+            </Grid>
+
+            <Label
+                Text="Leave this off for a planned event."
+                FontSize="13"
+                TextColor="#66736B" />
+
+            <Label Text="Notes (optional)" TextColor="#202B26" />
+
+            <Editor
+                x:Name="NotesEditor"
+                Placeholder="Add any useful details..."
+                MaxLength="2000"
+                AutoSize="TextChanges"
+                MinimumHeightRequest="110"
+                TextColor="#202B26"
+                PlaceholderColor="#66736B"
+                BackgroundColor="White" />
+
+            <Label
+                x:Name="ErrorLabel"
+                IsVisible="False"
+                TextColor="#B42318" />
+
+            <Button
+                x:Name="SaveButton"
+                Text="Save event"
+                Clicked="OnSaveClicked"
+                BackgroundColor="#2F6655"
+                TextColor="White"
+                CornerRadius="16"
+                HeightRequest="54" />
+
+            <Button
+                x:Name="DeleteButton"
+                Text="Delete event"
+                Clicked="OnDeleteClicked"
+                IsVisible="False"
+                BackgroundColor="#FEE4E2"
+                TextColor="#B42318"
+                CornerRadius="16"
+                HeightRequest="54" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

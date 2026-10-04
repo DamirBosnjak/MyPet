@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:MyPet.Models"
+    x:Class="MyPet.Views.PetDetailsPage"
+    x:DataType="models:Pet"
+    Title="Pet Details"
+    BackgroundColor="#F7F8F5">
+
+    <Grid
+        Padding="20"
+        RowDefinitions="*,Auto"
+        RowSpacing="16">
+
+        <CollectionView
+            x:Name="EventsCollection"
+            Grid.Row="0"
+            BackgroundColor="#F7F8F5"
+            SelectionMode="Single"
+            SelectionChanged="OnEventSelected">
+
+            <CollectionView.Header>
+                <VerticalStackLayout
+                    Spacing="16"
+                    Padding="0,0,0,16">
+
+                    <Border
+                        Padding="20"
+                        BackgroundColor="White"
+                        Stroke="#DDE5DE"
+                        StrokeShape="RoundRectangle 18">
+
+                        <VerticalStackLayout Spacing="6">
+
+                            <Border
+                                WidthRequest="100"
+                                HeightRequest="100"
+                                HorizontalOptions="Center"
+                                BackgroundColor="#E7EFE9"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 22"
+                                Margin="0,0,0,8">
+
+                                <Grid>
+                                    <Image
+                                        Source="{Binding PhotoPath}"
+                                        IsVisible="{Binding HasPhoto}"
+                                        Aspect="AspectFill" />
+
+                                    <Label
+                                        Text="🐾"
+                                        IsVisible="{Binding HasNoPhoto}"
+                                        FontSize="42"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center" />
+                                </Grid>
+                            </Border>
+
+                            <Label
+                                Text="{Binding Name}"
+                                FontSize="28"
+                                FontAttributes="Bold"
+                                TextColor="#202B26" />
+
+                            <Label
+                                Text="{Binding Description}"
+                                FontSize="16"
+                                TextColor="#66736B" />
+
+                            <Label
+                                Text="{Binding GenderText, StringFormat='Gender: {0}'}"
+                                FontSize="14"
+                                TextColor="#66736B" />
+
+                            <Label
+                                Text="{Binding BirthDateText, StringFormat='Birth date: {0}'}"
+                                FontSize="14"
+                                TextColor="#66736B" />
+
+                            <Label
+                                Text="{Binding Notes}"
+                                IsVisible="{Binding HasNotes}"
+                                LineBreakMode="WordWrap"
+                                FontSize="14"
+                                TextColor="#202B26"
+                                Margin="0,6,0,0" />
+
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <VerticalStackLayout Spacing="10">
+                        <Label
+                            Text="Health events"
+                            FontSize="22"
+                            FontAttributes="Bold"
+                            TextColor="#202B26" />
+
+                        <Button
+                            x:Name="AddEventButton"
+                            Text="+ Add health event"
+                            Clicked="OnAddEventClicked"
+                            IsEnabled="False"
+                            BackgroundColor="#2F6655"
+                            TextColor="White"
+                            CornerRadius="14"
+                            HeightRequest="50" />
+                    </VerticalStackLayout>
+
+                </VerticalStackLayout>
+            </CollectionView.Header>
+
+            <CollectionView.EmptyView>
+                <VerticalStackLayout Padding="12" Spacing="8">
+                    <Label
+                        Text="No health events yet"
+                        FontSize="18"
+                        FontAttributes="Bold"
+                        HorizontalTextAlignment="Center"
+                        TextColor="#202B26" />
+
+                    <Label
+                        Text="Keep vaccinations, vet visits and treatments together."
+                        HorizontalTextAlignment="Center"
+                        TextColor="#66736B" />
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:HealthEvent">
+
+                    <Border
+                        Padding="16"
+                        Margin="0,0,0,10"
+                        BackgroundColor="White"
+                        Stroke="#DDE5DE"
+                        StrokeShape="RoundRectangle 16">
+
+                        <VerticalStackLayout Spacing="6">
+
+                            <Label
+                                Text="{Binding Title}"
+                                FontSize="18"
+                                FontAttributes="Bold"
+                                TextColor="#202B26" />
+
+                            <Label
+                                Text="{Binding TypeText}"
+                                FontSize="14"
+                                TextColor="#66736B" />
+
+                            <Grid
+                                ColumnDefinitions="*,Auto"
+                                ColumnSpacing="12">
+
+                                <Label
+                                    Text="{Binding DateText}"
+                                    FontSize="14"
+                                    TextColor="#66736B" />
+
+                                <Label
+                                    Grid.Column="1"
+                                    Text="{Binding StatusText}"
+                                    FontSize="14"
+                                    FontAttributes="Bold"
+                                    TextColor="#2F6655">
+
+                                    <Label.Triggers>
+                                        <DataTrigger
+                                            TargetType="Label"
+                                            Binding="{Binding IsOverdue}"
+                                            Value="True">
+                                            <Setter
+                                                Property="TextColor"
+                                                Value="#B42318" />
+                                        </DataTrigger>
+
+                                        <DataTrigger
+                                            TargetType="Label"
+                                            Binding="{Binding IsCompleted}"
+                                            Value="True">
+                                            <Setter
+                                                Property="TextColor"
+                                                Value="#027A48" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+
+                                </Label>
+                            </Grid>
+
+                        </VerticalStackLayout>
+                    </Border>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+        <Grid
+            Grid.Row="1"
+            ColumnDefinitions="*,*"
+            ColumnSpacing="12">
+
+            <Button
+                x:Name="EditButton"
+                Text="Edit pet"
+                Clicked="OnEditClicked"
+                IsEnabled="False"
+                BackgroundColor="#E7EFE9"
+                TextColor="#2F6655"
+                CornerRadius="14"
+                HeightRequest="50" />
+
+            <Button
+                x:Name="DeleteButton"
+                Grid.Column="1"
+                Text="Delete pet"
+                Clicked="OnDeleteClicked"
+                IsEnabled="False"
+                BackgroundColor="#FEE4E2"
+                TextColor="#B42318"
+                CornerRadius="14"
+                HeightRequest="50" />
+
+        </Grid>
+    </Grid>
+</ContentPage>

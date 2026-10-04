@@ -1,0 +1,35 @@
+# Build output
+[Bb]in/
+[Oo]bj/
+
+# IDE settings
+.idea/
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.sln.DotSettings.user
+
+# macOS
+.DS_Store
+._*
+
+# Local databases
+*.db
+*.db3
+*.sqlite
+*.sqlite3
+*-shm
+*-wal
+
+# Signing files
+*.pfx
+*.p12
+*.keystore
+*.jks
+*.mobileprovision
+
+# Local environment files
+.env
+.env.*
