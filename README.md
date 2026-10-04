@@ -19,13 +19,13 @@ Features
   MyPet is currently a local, single-user application, so no account or login is required.
   Screenshots
 ### My Pets
-![My Pets](screenshots/my-pets.png)
+<img src="screenshots/my-pets.png" width="350">
 
 ### Pet Details
-![Pet Details](screenshots/pet-details.png)
+<img src="screenshots/pet-details.png" width="350">
 
 ### Care Overview
-![Care Overview](screenshots/care-overview.png)
+<img src="screenshots/care-overview.png" width="350">
 
 Technologies
 - C#
