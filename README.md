@@ -17,6 +17,7 @@ Features
 - Related health events are removed when a pet is deleted
 - Runs on both Android and iOS
   MyPet is currently a local, single-user application, so no account or login is required.
+  
   Screenshots
 ### My Pets
 <img src="screenshots/my-pets.png" width="350">
